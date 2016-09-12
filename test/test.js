@@ -5,6 +5,7 @@ let findOutlier = require('../src/find_the_parity_outlier');
 let XO = require('../src/exes_and_ohs.js');
 let diamond = require('../src/give_me_diamond');
 let validParentheses = require('../src/valid_parentheses');
+let difference = require('../src/array.diff');
 
 
 describe('Jaden Casing String', () => {
@@ -56,6 +57,13 @@ describe('Valid Parentheses', function () {
   it('should return true if parentheses are correctly closed', function () {
     assert.equal(validParentheses( "()" ), true);
     assert.equal(validParentheses( "())" ), false);
+  });
+});
+
+describe('Array.diff', function () {
+  it('should return arrays excluding items in second argument', function () {
+    assert.deepEqual(difference(['a', 'b', 'c'], ['c']), ['a', 'b']);
+    assert.deepEqual(difference(['a', 'c', 'c'], ['c']), ['a']);
   });
 });
 
