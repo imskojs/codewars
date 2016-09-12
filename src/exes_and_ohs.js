@@ -1,4 +1,4 @@
-module.exports = (str) => {
+module.exports = function(str) {
   let nX = 0;
   let nO = 0;
   for(let i = 0; i < str.length; ++i){

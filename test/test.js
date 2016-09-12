@@ -2,8 +2,9 @@ let assert = require('chai').assert;
 require('../src/jaden_casing_strings');
 let calculateYears = require('../src/money,money,money');
 let findOutlier = require('../src/find_the_parity_outlier');
-let XO = require('../src/exes_and_ohs');
+let XO = require('../src/exes_and_ohs.js');
 let diamond = require('../src/give_me_diamond');
+let validParentheses = require('../src/valid_parentheses');
 
 
 describe('Jaden Casing String', () => {
@@ -34,7 +35,7 @@ describe('Find the Parity Outlier', function () {
 
 describe('Exes and Ohs', function () {
   it('should check whether a string has the same amount of xs ands os', function () {
-    assert.equal(XO('xo'),true);
+    assert.equal(XO('xo'),true );
     assert.equal(XO("xxOo"),true);
     assert.equal(XO("xxxm"),false);
     assert.equal(XO("Oo"),false);
@@ -50,3 +51,11 @@ describe('Give me Diamond', function () {
     assert.equal(diamond(0), null);
   });
 });
+
+describe('Valid Parentheses', function () {
+  it('should return true if parentheses are correctly closed', function () {
+    assert.equal(validParentheses( "()" ), true);
+    assert.equal(validParentheses( "())" ), false);
+  });
+});
+
