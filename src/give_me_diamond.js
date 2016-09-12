@@ -9,11 +9,12 @@ module.exports = (n) => {
   // let stars = baseStars;
   for(let i = 0; i < numbersAbove; ++i){
     let currentStarsArray = baseStarsArray.slice();
+    let length = currentStarsArray.length;
     for(let j = 0; j <= i; ++j){
       currentStarsArray[j] = ' ';
-      currentStarsArray[currentStarsArray.length - 1 - j] = ' ';
+      currentStarsArray.splice(length - j - 1 , 1);
     }
-    currentStarsArray[currentStarsArray.length - 1] = '\n';
+    currentStarsArray[currentStarsArray.length] = '\n';
     resultArray.push(currentStarsArray.join(''));
     resultArray.unshift(currentStarsArray.join(''));
   }
