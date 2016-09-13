@@ -8,6 +8,8 @@ let validParentheses = require('../src/valid_parentheses');
 let difference = require('../src/array.diff');
 let validate = require('../src/validate_credit_card_number');
 let list = require('../src/format_like_bart');
+let autocorrect = require('../src/evil_autocorrect_prank');
+let cakes = require('../src/pete,the_baker');
 
 
 describe('Jaden Casing String', () => {
@@ -80,13 +82,37 @@ describe('Validate Credit Card Number', function () {
 describe('Formats a string of names like "Bart,List & Maggie"', function () {
   it('Format a string with last 3 words using ampersand', function () {
     assert.equal(list([{name: 'Bart'},{name: 'Lisa'},{name: 'Maggie'},{name: 'Homer'},{name: 'Marge'}]), 'Bart, Lisa, Maggie, Homer & Marge',
-    "Must work with many names")
+    "Must work with many names");
     assert.equal(list([{name: 'Bart'},{name: 'Lisa'},{name: 'Maggie'}]), 'Bart, Lisa & Maggie',
-    "Must work with many names")
+    "Must work with many names");
     assert.equal(list([{name: 'Bart'},{name: 'Lisa'}]), 'Bart & Lisa', 
-    "Must work with two names")
-    assert.equal(list([{name: 'Bart'}]), 'Bart', "Wrong output for a single name")
-    assert.equal(list([]), '', "Must work with no names")
+    "Must work with two names");
+    assert.equal(list([{name: 'Bart'}]), 'Bart', "Wrong output for a single name");
+    assert.equal(list([]), '', "Must work with no names");
+  });
+});
+
+
+describe('Evil Autocorrect Prank', function () {
+  it('should change instance of you or u to your sister youuuu, uuuu, u, you', function () {
+    assert.equal(autocorrect('you'), 'your sister');
+    assert.equal(autocorrect('u'), 'your sister');
+    assert.equal(autocorrect('youtube'), 'youtube');
+    assert.equal(autocorrect('urban'), 'urban');
+    assert.equal(autocorrect('youuuuu'), 'your sister');
+    assert.equal(autocorrect('uuu'), 'uuu');
+  });
+});
+
+describe('Pete, the baker', function () {
+  it('pass example tests', function() {
+    let recipe = {flour: 500, sugar: 200, eggs: 1};
+    let available = {flour: 1200, sugar: 1200, eggs: 5, milk: 200};
+    assert.equal(cakes(recipe, available), 2);
+    
+    recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};
+    available = {sugar: 500, flour: 2000, milk: 2000};
+    assert.equal(cakes(recipe, available), 0);
   });
 });
 
