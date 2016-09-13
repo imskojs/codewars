@@ -6,6 +6,8 @@ let XO = require('../src/exes_and_ohs.js');
 let diamond = require('../src/give_me_diamond');
 let validParentheses = require('../src/valid_parentheses');
 let difference = require('../src/array.diff');
+let validate = require('../src/validate_credit_card_number');
+let list = require('../src/format_like_bart');
 
 
 describe('Jaden Casing String', () => {
@@ -64,6 +66,27 @@ describe('Array.diff', function () {
   it('should return arrays excluding items in second argument', function () {
     assert.deepEqual(difference(['a', 'b', 'c'], ['c']), ['a', 'b']);
     assert.deepEqual(difference(['a', 'c', 'c'], ['c']), ['a']);
+  });
+});
+
+describe('Validate Credit Card Number', function () {
+  it('should validate credit card number using the Luhn Algorithm', function () {
+    assert.equal(validate(891), false);
+    assert.equal(validate(1714), false);
+    assert.equal(validate(893), true);
+  });
+});
+
+describe('Formats a string of names like "Bart,List & Maggie"', function () {
+  it('Format a string with last 3 words using ampersand', function () {
+    assert.equal(list([{name: 'Bart'},{name: 'Lisa'},{name: 'Maggie'},{name: 'Homer'},{name: 'Marge'}]), 'Bart, Lisa, Maggie, Homer & Marge',
+    "Must work with many names")
+    assert.equal(list([{name: 'Bart'},{name: 'Lisa'},{name: 'Maggie'}]), 'Bart, Lisa & Maggie',
+    "Must work with many names")
+    assert.equal(list([{name: 'Bart'},{name: 'Lisa'}]), 'Bart & Lisa', 
+    "Must work with two names")
+    assert.equal(list([{name: 'Bart'}]), 'Bart', "Wrong output for a single name")
+    assert.equal(list([]), '', "Must work with no names")
   });
 });
 
