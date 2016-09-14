@@ -1,7 +1,4 @@
 module.exports = (n) => {
-  // if(n === 1) {
-  //   return 'odd';
-  // }
   let nRoot = Math.sqrt(n);
   let results = [];
   for(let i = 1; i < Math.floor(nRoot) + 1; ++i){
