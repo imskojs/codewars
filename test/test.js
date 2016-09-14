@@ -10,6 +10,7 @@ let validate = require('../src/validate_credit_card_number');
 let list = require('../src/format_like_bart');
 let autocorrect = require('../src/evil_autocorrect_prank');
 let cakes = require('../src/pete,the_baker');
+let oddity = require('../src/oddity');
 
 
 describe('Jaden Casing String', () => {
@@ -113,6 +114,14 @@ describe('Pete, the baker', function () {
     recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};
     available = {sugar: 500, flour: 2000, milk: 2000};
     assert.equal(cakes(recipe, available), 0);
+  });
+});
+
+describe('Odd/Even number of divisors', function () {
+  it('should return whether number of divisors is odd or even', function () {
+    assert.equal(oddity(1),'odd');
+    assert.equal(oddity(5),'even');
+    assert.equal(oddity(16),'odd');
   });
 });
 
