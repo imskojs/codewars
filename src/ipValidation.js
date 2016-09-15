@@ -22,36 +22,29 @@
 module.exports = 
 function isValidIP(str) {
   // console.log(str);
-  let numbers = str.split('.').map((strNum) => {
-    return +strNum;
-  });
-  if(!areNumbers(str)){
-    return false;
-  }
+  let strs = str.split('.');
+  let numbers = strs.map(strNum => +strNum);
 
-  if(isClassA(str)){
-    let H = numbers.slice(1);
-    let N = numbers.slice(0, 1);
-    if(validHN(H, N)){
-      return true;
-    }
-  } else if(isClassB(str)){
-    let H = numbers.slice(2);
-    let N = numbers.slice(0, 2);
-    if(validHN(H, N)){
-      return true;
-    }
-  } else if(isClassC(str)){
-    let H = numbers.slice(3);
-    let N = numbers.slice(0, 3);
-    if(validHN(H, N)){
-      return true;
-    }
+  if(!areNumbers(strs)){return false; }
+
+  let sliceIndex;
+  if(isClass('A',numbers)){
+    sliceIndex = 1;
+  } else if(isClass('B', numbers)){
+    sliceIndex = 2;
+  } else if(isClass('C', numbers)){
+    sliceIndex = 3;
   }
+  let H = numbers.slice(sliceIndex);
+  let N = numbers.slice(0, sliceIndex);
+  if(validHN(H, N)){
+    return true;
+  } 
+  
   return false;
+ 
 
-  function areNumbers(str){
-    let strs = str.split('.');
+  function areNumbers(strs){
     let areNotChars = strs.every((numStr) => {
       if(
         isNaN(+numStr) ||
@@ -93,19 +86,17 @@ function isValidIP(str) {
   }
 
 
-  function isClassA(str){
-    let num = +str.split('.')[0];
-    return num >= 0 && num <=126 ? true : false;
-  }
-
-  function isClassB(str){
-    let num = +str.split('.')[0];
-    return num >= 128 && num <=191 ? true : false;
-  }
-
-  function isClassC(str){
-    let num = +str.split('.')[0];
-    return num >= 192 && num <= 255 ? true : false;
+  function isClass(type, numbers){
+    let num = numbers[0];
+    if(num >= 1 && num <=126 && type === 'A'){
+      return true;
+    } else if(num >= 128 && num <=191 && type === 'B'){
+      return true;
+    } else if(num >= 192 && num <= 223 && type === 'C'){
+      return true;
+    } else {
+      return false;
+    }
   }
   function validHN(H, N){
     // if(H.every(num => num === 0)){return false; }
