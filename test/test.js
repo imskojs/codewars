@@ -1,4 +1,5 @@
 let assert = require('chai').assert;
+let expect = require('chai').expect;
 require('../src/jaden_casing_strings');
 let calculateYears = require('../src/money,money,money');
 let findOutlier = require('../src/find_the_parity_outlier');
@@ -12,6 +13,7 @@ let autocorrect = require('../src/evil_autocorrect_prank');
 let cakes = require('../src/pete,the_baker');
 let oddity = require('../src/oddity');
 let isValidIP = require('../src/ipValidation');
+let score = require('../src/greed_is_good');
 
 
 describe('Jaden Casing String', () => {
@@ -138,10 +140,16 @@ describe('IP Validation', function () {
     assert.equal(isValidIP('1.2.3.4.5'), false);
     assert.equal(isValidIP('123.456.78.90'), false);
     assert.equal(isValidIP('12 3.045.067.089'), false);
-    
     assert.equal(isValidIP('0.34.82.53'), true);
-       
+  });
+});
 
+describe('Greed is Good', function () {
+  it('should return correct value from the rules', function(){
+    assert.equal(score( [2, 3, 4, 6, 2] ), 0);
+    assert.equal(score( [4, 4, 4, 3, 3] ), 400);
+    assert.equal(score( [2, 4, 4, 5, 4] ), 450);
+    assert.equal(score( [1, 1, 1, 3, 3] ), 1000);
   });
 });
 
