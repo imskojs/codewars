@@ -11,6 +11,7 @@ let list = require('../src/format_like_bart');
 let autocorrect = require('../src/evil_autocorrect_prank');
 let cakes = require('../src/pete,the_baker');
 let oddity = require('../src/oddity');
+let isValidIP = require('../src/ipValidation');
 
 
 describe('Jaden Casing String', () => {
@@ -124,4 +125,24 @@ describe('Odd/Even number of divisors', function () {
     assert.equal(oddity(16),'odd');
   });
 });
+
+describe('IP Validation', function () {
+  it('should validate ipv4 addresses', function () {
+    assert.equal(isValidIP('123.45.67.89'), true);
+    assert.equal(isValidIP('1.2.3.4'), true);
+    assert.equal(isValidIP('123.1.1.0'), true);
+    assert.equal(isValidIP('1.2.3'), false);
+    assert.equal(isValidIP('0.0.0.0'), true);
+    assert.equal(isValidIP('255.255.255.255'), true);
+    assert.equal(isValidIP('238.46.26.43'), true);
+    assert.equal(isValidIP('1.2.3.4.5'), false);
+    assert.equal(isValidIP('123.456.78.90'), false);
+    assert.equal(isValidIP('12 3.045.067.089'), false);
+    
+    assert.equal(isValidIP('0.34.82.53'), true);
+       
+
+  });
+});
+
 
