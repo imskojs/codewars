@@ -14,6 +14,7 @@ let cakes = require('../src/pete,the_baker');
 let oddity = require('../src/oddity');
 let isValidIP = require('../src/ipValidation');
 let score = require('../src/greed_is_good');
+let palindromeChainLength = require('../src/palindrome_chain_length');
 
 
 describe('Jaden Casing String', () => {
@@ -150,6 +151,12 @@ describe('Greed is Good', function () {
     assert.equal(score( [4, 4, 4, 3, 3] ), 400);
     assert.equal(score( [2, 4, 4, 5, 4] ), 450);
     assert.equal(score( [1, 1, 1, 3, 3] ), 1000);
+  });
+});
+
+describe('Palindrome chain length', function () {
+  it('should return number of operations needed to make a number palindrome', function () {
+    assert.equal(palindromeChainLength(87), 4);
   });
 });
 

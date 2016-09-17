@@ -1,7 +1,6 @@
 module.exports = 
 
 function score(dice){
-  console.log(dice);
   let SCORES = {
     1: 1000,
     2: 200,
@@ -25,7 +24,6 @@ function score(dice){
       arrays.push(dice.slice(base));
     }
   }
-  // console.log("arrays :::\n", arrays);
   let totalScores = 0;
   arrays.forEach((array) => {
     let num = array[0];
@@ -49,6 +47,5 @@ function score(dice){
     }
 
   });
-  // console.log("totalScores :::\n", totalScores);
   return totalScores;
 };
