@@ -22,7 +22,8 @@ function nextBigger(n){
   if(swapPosition === -1){
     return -1;
   }
-  let right = highest.slice(swapPosition + 1).sort((a, b) => a - b);
+  // use Radix sort for opt
+  let right = highest.slice(swapPosition + 1).sort(/*(a, b) => a - b*/);
   let left = highest.slice(0, swapPosition + 1);
   let result = +left.concat(right).join('');
   return result;
