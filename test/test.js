@@ -15,6 +15,7 @@ let oddity = require('../src/oddity');
 let isValidIP = require('../src/ipValidation');
 let score = require('../src/greed_is_good');
 let palindromeChainLength = require('../src/palindrome_chain_length');
+let nextBigger = require('../src/next_bigger');
 
 
 describe('Jaden Casing String', () => {
@@ -157,6 +158,16 @@ describe('Greed is Good', function () {
 describe('Palindrome chain length', function () {
   it('should return number of operations needed to make a number palindrome', function () {
     assert.equal(palindromeChainLength(87), 4);
+  });
+});
+
+describe('Next bigger number with the same digits', function () {
+  it('should return the biggest number formed using input', function () {
+    assert.equal(nextBigger(12),21);
+    assert.equal(nextBigger(513),531);
+    assert.equal(nextBigger(2017),7210);
+    assert.equal(nextBigger(414),441);
+    assert.equal(nextBigger(144),441);
   });
 });
 
