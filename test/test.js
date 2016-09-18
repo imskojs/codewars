@@ -165,9 +165,12 @@ describe('Next bigger number with the same digits', function () {
   it('should return the biggest number formed using input', function () {
     assert.equal(nextBigger(12),21);
     assert.equal(nextBigger(513),531);
-    assert.equal(nextBigger(2017),7210);
+    assert.equal(nextBigger(2017),2071);
     assert.equal(nextBigger(414),441);
-    assert.equal(nextBigger(144),441);
+    assert.equal(nextBigger(144),414);
+    assert.equal(nextBigger(1234567890),1234567908);
+    assert.equal(nextBigger(9876543210),-1);
+    assert.equal(nextBigger(59884848459853), 59884848483559);
   });
 });
 
