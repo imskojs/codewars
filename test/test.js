@@ -1,5 +1,5 @@
 let assert = require('chai').assert;
-let expect = require('chai').expect;
+// let expect = require('chai').expect;
 require('../src/jaden_casing_strings');
 let calculateYears = require('../src/money,money,money');
 let findOutlier = require('../src/find_the_parity_outlier');
@@ -16,6 +16,7 @@ let isValidIP = require('../src/ipValidation');
 let score = require('../src/greed_is_good');
 let palindromeChainLength = require('../src/palindrome_chain_length');
 let nextBigger = require('../src/next_bigger');
+let romanNumeral = require('../src/roman_numerals_encoder');
 
 
 describe('Jaden Casing String', () => {
@@ -171,6 +172,12 @@ describe('Next bigger number with the same digits', function () {
     assert.equal(nextBigger(1234567890),1234567908);
     assert.equal(nextBigger(9876543210),-1);
     assert.equal(nextBigger(59884848459853), 59884848483559);
+  });
+});
+
+describe('Roman Numerals Encoder', function () {
+  it('should convert number to roman numerals', function () {
+    assert.equal(romanNumeral(1000), 'M');
   });
 });
 
