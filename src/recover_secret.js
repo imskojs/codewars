@@ -1,4 +1,5 @@
 // should work if tail call optimization is enabled.
+//http://stackoverflow.com/questions/23260390/node-js-tail-call-optimization-possible-or-not
 // whatisup
 //    t  up
 // wh  i
