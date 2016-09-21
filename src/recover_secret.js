@@ -1,3 +1,4 @@
+// should work if tail call optimization is enabled.
 // whatisup
 //    t  up
 // wh  i
