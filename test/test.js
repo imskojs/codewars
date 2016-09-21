@@ -17,6 +17,7 @@ let score = require('../src/greed_is_good');
 let palindromeChainLength = require('../src/palindrome_chain_length');
 let nextBigger = require('../src/next_bigger');
 let romanNumeral = require('../src/roman_numerals_encoder');
+let recoverSecret = require('../src/recover_secret');
 
 
 describe('Jaden Casing String', () => {
@@ -178,6 +179,21 @@ describe('Next bigger number with the same digits', function () {
 describe('Roman Numerals Encoder', function () {
   it('should convert number to roman numerals', function () {
     assert.equal(romanNumeral(1000), 'M');
+  });
+});
+
+describe('Recover a secret string from random triplets', function () {
+  it('should find a string given arbitrary array of arrays', function () {
+    let triplets1 = [
+      ['t','u','p'],
+      ['w','h','i'],
+      ['t','s','u'],
+      ['a','t','s'],
+      ['h','a','p'],
+      ['t','i','s'],
+      ['w','h','s']
+    ];
+    assert.equal(recoverSecret(triplets1), 'whatisup');
   });
 });
 
