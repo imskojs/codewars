@@ -1,5 +1,12 @@
 // should work if tail call optimization is enabled.
 //http://stackoverflow.com/questions/23260390/node-js-tail-call-optimization-possible-or-not
+
+
+//====================================================
+//  Must use tail call to make this work
+//====================================================
+// node --harmony-tailcalls recover_secret.js
+
 // whatisup
 //    t  up
 // wh  i
