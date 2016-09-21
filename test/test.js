@@ -18,6 +18,7 @@ let palindromeChainLength = require('../src/palindrome_chain_length');
 let nextBigger = require('../src/next_bigger');
 let romanNumeral = require('../src/roman_numerals_encoder');
 let recoverSecret = require('../src/recover_secret');
+let stripUrlParams = require('../src/strip_url_params');
 
 
 describe('Jaden Casing String', () => {
@@ -185,15 +186,32 @@ describe('Roman Numerals Encoder', function () {
 describe('Recover a secret string from random triplets', function () {
   it('should find a string given arbitrary array of arrays', function () {
     let triplets1 = [
-      ['t','u','p'],
-      ['w','h','i'],
-      ['t','s','u'],
-      ['a','t','s'],
-      ['h','a','p'],
-      ['t','i','s'],
-      ['w','h','s']
+      ['t','u','p'], ['w','h','i'], ['t','s','u'],
+      ['a','t','s'], ['h','a','p'], ['t','i','s'], ['w','h','s']
     ];
     assert.equal(recoverSecret(triplets1), 'whatisup');
+  });
+});
+
+describe('Strip Url Params', function () {
+  it('should strip url params', function () {
+
+    assert.equal(
+      stripUrlParams('www.codewars.com?a=1&b=2&a=2'), 
+      'www.codewars.com?a=1&b=2'
+    );
+
+    assert.equal(
+      stripUrlParams('www.codewars.com?a=1&b=2&a=2', ['b']), 
+      'www.codewars.com?a=1'
+    );
+
+    assert.equal(
+      stripUrlParams('www.codewars.com', ['b']),
+      'www.codewars.com'
+    );
+
+
   });
 });
 
