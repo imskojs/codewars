@@ -2,6 +2,7 @@ module.exports =
 
 function stripUrlParams(url, paramsToStrip){
   // strip duplicate params
+  console.log(url);
   let urls = url.split('?');
   let host = urls[0];
   let query = urls[1];
@@ -10,7 +11,6 @@ function stripUrlParams(url, paramsToStrip){
   }
   let queries = query.split('&');
   let letters = queries.map(val =>  val.split('=')[0]);
-  console.log("queries :::\n", queries);
   letters.reduceRight((prev, curr, index, array) => {
     let prevIndex = index + 1;
     if(array.indexOf(prev) !== prevIndex){
@@ -28,7 +28,6 @@ function stripUrlParams(url, paramsToStrip){
     }
     return curr;
   });
-  console.log("queries :::\n", queries);
   url = host + '?' + queries.join('&');
   return url;
 
