@@ -218,32 +218,71 @@ describe('Strip Url Params', function () {
 
 
 describe('Breadcrumb Generator', function () {
-  it('should generate breadcrumb from url', function () {
 
+  it('should make all elements uppercase, and make first text HOME', function () {
     assert.equal(
-      generateBC("mysite.com/pictures/holidays.html", " : "),
-      '<a href="/">HOME</a> : <a href="/pictures/">PICTURES</a> : <span class="active">HOLIDAYS</span>'
-    );
-
-    assert.equal(
-      generateBC("www.codewars.com/users/GiacomoSorbi", " / "),
-      '<a href="/">HOME</a> / <a href="/users/">USERS</a> / <span class="active">GIACOMOSORBI</span>'
-    );
-
-    assert.equal(
-      generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " * "),
-     '<a href="/">HOME</a> * <a href="/important/">IMPORTANT</a> * <a href="/important/confidential/">CONFIDENTIAL</a> * <span class="active">DOCS</span>'
-    );
-
-    assert.equal(
-      generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "),
-      '<a href="/">HOME</a> > <a href="/very-long-url-to-make-a-silly-yet-meaningful-example/">VLUMSYME</a> > <span class="active">EXAMPLE</span>'
-    );
-
-    assert.equal(
-      generateBC("www.very-long-site_name-to-make-a-silly-yet-meaningful-example.com/users/giacomo-sorbi", " + "),
-      '<a href="/">HOME</a> + <a href="/users/">USERS</a> + <span class="active">GIACOMO SORBI</span>'
+      generateBC("www.naver.com", " : "),
+      '<a href="/">HOME</a>'
     );
   });
+
+  it('should wrap last text with span.active, and use seprator given', function () {
+    assert.equal(
+      generateBC("http://www.naver.com/blog", " : "),
+      '<a href="/">HOME</a> : <span class="active">BLOG</span>'
+    );
+  });
+
+  it('should not return file extension', function () {
+    assert.equal(
+      generateBC("http://www.naver.com/blog.html", " : "),
+      '<a href="/">HOME</a> : <span class="active">BLOG</span>'
+    );
+  });
+
+  it('should handle protocol', function () {
+    assert.equal(
+      generateBC("http://www.naver.com", " : "),
+      '<span class="active">HOME</span>'
+    );
+  });
+
+  it('should handle trailing slash', function () {
+    assert.equal(
+      generateBC("www.naver.com/", " : "),
+      '<span class="active">HOME</span>'
+    );
+  });
+
+  it('should ignore index.*', function () {
+    assert.equal(
+      generateBC("www.microsoft.com/important/docs/index.htm", " * "),
+     '<a href="/">HOME</a> * <a href="/important/">IMPORTANT</a> * <span class="active">DOCS</span>'
+    );
+  });
+
+  it(`should make characters > 30 to acrynoms other than root(home), also it should remove
+    ["the","of","in","from","by","with","and", "or", "for", "to", "at", "a"]
+    when making acronyms`, function () {
+    assert.equal(
+      generateBC("www.very-long-url-to-make-a-silly-yet.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "),
+      '<a href="/">HOME</a> > <a href="/very-long-url-to-make-a-silly-yet-meaningful-example/">VLUMSYME</a> > <span class="active">EXAMPLE</span>'
+    );
+  });
+
+  it('should convert characters with `-` in text to space', function () {
+    assert.equal(
+      generateBC("mysite.com/very-long/example.asp", " > "),
+      '<a href="/">HOME</a> > <a href="/very-long/">VERY LONG</a> > <span class="active">EXAMPLE</span>'
+    );
+  });
+
+  it('should ignore anchors and parameters', function () {
+    assert.equal(
+      generateBC("mysite.com/very-long/example.asp#top?x=11&y=22", " > "),
+      '<a href="/">HOME</a> > <a href="/very-long/">VERY LONG</a> > <span class="active">EXAMPLE</span>'
+    );
+  });
+
 });
 
