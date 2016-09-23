@@ -19,6 +19,7 @@ let nextBigger = require('../src/next_bigger');
 let romanNumeral = require('../src/roman_numerals_encoder');
 let recoverSecret = require('../src/recover_secret');
 let stripUrlParams = require('../src/strip_url_params');
+let generateBC = require('../src/breadcrumb_generator');
 
 
 describe('Jaden Casing String', () => {
@@ -215,4 +216,34 @@ describe('Strip Url Params', function () {
   });
 });
 
+
+describe('Breadcrumb Generator', function () {
+  it('should generate breadcrumb from url', function () {
+
+    assert.equal(
+      generateBC("mysite.com/pictures/holidays.html", " : "),
+      '<a href="/">HOME</a> : <a href="/pictures/">PICTURES</a> : <span class="active">HOLIDAYS</span>'
+    );
+
+    assert.equal(
+      generateBC("www.codewars.com/users/GiacomoSorbi", " / "),
+      '<a href="/">HOME</a> / <a href="/users/">USERS</a> / <span class="active">GIACOMOSORBI</span>'
+    );
+
+    assert.equal(
+      generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " * "),
+     '<a href="/">HOME</a> * <a href="/important/">IMPORTANT</a> * <a href="/important/confidential/">CONFIDENTIAL</a> * <span class="active">DOCS</span>'
+    );
+
+    assert.equal(
+      generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "),
+      '<a href="/">HOME</a> > <a href="/very-long-url-to-make-a-silly-yet-meaningful-example/">VLUMSYME</a> > <span class="active">EXAMPLE</span>'
+    );
+
+    assert.equal(
+      generateBC("www.very-long-site_name-to-make-a-silly-yet-meaningful-example.com/users/giacomo-sorbi", " + "),
+      '<a href="/">HOME</a> + <a href="/users/">USERS</a> + <span class="active">GIACOMO SORBI</span>'
+    );
+  });
+});
 
