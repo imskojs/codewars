@@ -2,7 +2,6 @@ module.exports =
 
 function stripUrlParams(url, paramsToStrip){
   // strip duplicate params
-  console.log(url);
   let urls = url.split('?');
   let host = urls[0];
   let query = urls[1];
