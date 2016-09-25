@@ -20,6 +20,7 @@ let romanNumeral = require('../src/roman_numerals_encoder');
 let recoverSecret = require('../src/recover_secret');
 let stripUrlParams = require('../src/strip_url_params');
 let generateBC = require('../src/breadcrumb_generator');
+let parseToInt = require('../src/parse_int');
 
 
 describe('Jaden Casing String', () => {
@@ -219,49 +220,49 @@ describe('Strip Url Params', function () {
 
 describe('Breadcrumb Generator', function () {
 
-  xit('should make all elements uppercase, and make first text HOME', function () {
+  it('should make all elements uppercase, and make first text HOME', function () {
     assert.equal(
       generateBC("www.naver.com", " : "),
       '<span class="active">HOME</span>'
     );
   });
 
-  xit('should wrap last text with span.active, and use seprator given', function () {
+  it('should wrap last text with span.active, and use seprator given', function () {
     assert.equal(
       generateBC("http://www.naver.com/blog", " : "),
       '<a href="/">HOME</a> : <span class="active">BLOG</span>'
     );
   });
 
-  xit('should not return file extension', function () {
+  it('should not return file extension', function () {
     assert.equal(
       generateBC("http://www.naver.com/blog.html", " : "),
       '<a href="/">HOME</a> : <span class="active">BLOG</span>'
     );
   });
 
-  xit('should handle protocol', function () {
+  it('should handle protocol', function () {
     assert.equal(
       generateBC("http://www.naver.com", " : "),
       '<span class="active">HOME</span>'
     );
   });
 
-  xit('should handle trailing slash', function () {
+  it('should handle trailing slash', function () {
     assert.equal(
       generateBC("www.naver.com/", " : "),
       '<span class="active">HOME</span>'
     );
   });
 
-  xit('should ignore index.*', function () {
+  it('should ignore index.*', function () {
     assert.equal(
       generateBC("www.microsoft.com/important/docs/index.htm", " * "),
      '<a href="/">HOME</a> * <a href="/important/">IMPORTANT</a> * <span class="active">DOCS</span>'
     );
   });
 
-  xit(`should make characters > 30 to acrynoms other than root(home), also it should remove
+  it(`should make characters > 30 to acrynoms other than root(home), also it should remove
     ["the","of","in","from","by","with","and", "or", "for", "to", "at", "a"]
     when making acronyms`, function () {
     assert.equal(
@@ -270,7 +271,7 @@ describe('Breadcrumb Generator', function () {
     );
   });
 
-  xit('should convert characters with `-` in text to space', function () {
+  it('should convert characters with `-` in text to space', function () {
     assert.equal(
       generateBC("mysite.com/very-long/example.asp", " > "),
       '<a href="/">HOME</a> > <a href="/very-long/">VERY LONG</a> > <span class="active">EXAMPLE</span>'
@@ -286,3 +287,36 @@ describe('Breadcrumb Generator', function () {
 
 });
 
+describe('parseInt() reloaded', function () {
+
+  it('should handle hundred', function () {
+    assert.equal(parseToInt('one hundred ten'), 110);
+    assert.equal(parseToInt('three hundred five'), 105);
+  });
+  it('should handle 11,12, ..., 19, 20, 30, 40, ..., 90', function () {
+    assert.equal(parseToInt('eleven'), 11);
+    assert.equal(parseToInt('one hundred eleven'), 111);
+    assert.equal(parseToInt('one hundred fifteen'), 115);
+    assert.equal(parseToInt('twenty'), 20);
+    assert.equal(parseToInt('fourty'), 40);
+    assert.equal(parseToInt('two hundred seventy'), 270);
+  });
+
+  it('should handle "-"', function () {
+    assert.equal(parseToInt('twenty-five'), 25);
+    assert.equal(parseToInt('fourty-one'), 41);
+    assert.equal(parseToInt('two hundred seventy-seven'), 277);
+  });
+
+  it('should handle "and"', function () {
+    assert.equal(parseToInt('three hundred and twenty-five'), 325);
+  });
+
+  it('should handle thousand, and one million', function () {
+    assert.equal(parseToInt('three thousand one hundred fourty'), 3140);
+    assert.equal(parseToInt('one hundred fourty-five thousand two hundred fourty'), 145240);
+    assert.equal(parseToInt('one million'), 1000000);
+  });
+
+
+});

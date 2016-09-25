@@ -59,7 +59,6 @@ function cleanObjs(objs){
   objs.forEach((obj) => {
     if(obj.text.includes('-')){
       if(obj.text.length > 30){
-        console.log("obj.text :::\n", obj.text);
         obj.text = obj.text.split('-').map((text) => {
           if(TO_EXCLUDES.indexOf(text) !== -1){
             return '';
@@ -69,12 +68,10 @@ function cleanObjs(objs){
         }).join('');
       } else {
         obj.text = obj.text.split('-').join(' ');
-        console.log("obj :::\n", obj);
       }
     }
   });
 
-  // console.log("objs :::\n", objs);
 
 
   // ignore index
