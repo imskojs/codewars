@@ -291,7 +291,7 @@ describe('parseInt() reloaded', function () {
 
   it('should handle hundred', function () {
     assert.equal(parseToInt('one hundred ten'), 110);
-    assert.equal(parseToInt('three hundred five'), 105);
+    assert.equal(parseToInt('three hundred five'), 305);
   });
   it('should handle 11,12, ..., 19, 20, 30, 40, ..., 90', function () {
     assert.equal(parseToInt('eleven'), 11);
