@@ -1,5 +1,5 @@
 let assert = require('chai').assert;
-// let expect = require('chai').expect;
+let expect = require('chai').expect;
 require('../src/jaden_casing_strings');
 let calculateYears = require('../src/money,money,money');
 let findOutlier = require('../src/find_the_parity_outlier');
@@ -21,6 +21,7 @@ let recoverSecret = require('../src/recover_secret');
 let stripUrlParams = require('../src/strip_url_params');
 let generateBC = require('../src/breadcrumb_generator');
 let parseToInt = require('../src/parse_int');
+let hamming = require('../src/hamming');
 
 
 describe('Jaden Casing String', () => {
@@ -298,13 +299,13 @@ describe('parseInt() reloaded', function () {
     assert.equal(parseToInt('one hundred eleven'), 111);
     assert.equal(parseToInt('one hundred fifteen'), 115);
     assert.equal(parseToInt('twenty'), 20);
-    assert.equal(parseToInt('fourty'), 40);
+    assert.equal(parseToInt('forty'), 40);
     assert.equal(parseToInt('two hundred seventy'), 270);
   });
 
   it('should handle "-"', function () {
     assert.equal(parseToInt('twenty-five'), 25);
-    assert.equal(parseToInt('fourty-one'), 41);
+    assert.equal(parseToInt('forty-one'), 41);
     assert.equal(parseToInt('two hundred seventy-seven'), 277);
   });
 
@@ -313,10 +314,36 @@ describe('parseInt() reloaded', function () {
   });
 
   it('should handle thousand, and one million', function () {
-    assert.equal(parseToInt('three thousand one hundred fourty'), 3140);
-    assert.equal(parseToInt('one hundred fourty-five thousand two hundred fourty'), 145240);
+    assert.equal(parseToInt('three thousand one hundred forty'), 3140);
+    assert.equal(parseToInt('one hundred forty-five thousand two hundred forty'), 145240);
     assert.equal(parseToInt('one million'), 1000000);
   });
 
 
 });
+
+describe('Hamming Numbers', function () {
+  it('should find nth', function () {
+    expect(hamming(1)).to.equal(1);
+    expect(hamming(2)).to.equal(2);
+    expect(hamming(3)).to.equal(3);
+    expect(hamming(4)).to.equal(4);
+    expect(hamming(5)).to.equal(5);
+    expect(hamming(6)).to.equal(6);
+    expect(hamming(7)).to.equal(8);
+    expect(hamming(8)).to.equal(9);
+    expect(hamming(9)).to.equal(10);
+    expect(hamming(10)).to.equal(12);
+    expect(hamming(11)).to.equal(15);
+    expect(hamming(12)).to.equal(16);
+    expect(hamming(13)).to.equal(18);
+    expect(hamming(14)).to.equal(20);
+    expect(hamming(15)).to.equal(24);
+    expect(hamming(16)).to.equal(25);
+    expect(hamming(17)).to.equal(27);
+    expect(hamming(18)).to.equal(30);
+    expect(hamming(19)).to.equal(32);
+  });
+});
+
+
