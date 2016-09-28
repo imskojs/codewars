@@ -22,6 +22,7 @@ let stripUrlParams = require('../src/strip_url_params');
 let generateBC = require('../src/breadcrumb_generator');
 let parseToInt = require('../src/parse_int');
 let hamming = require('../src/hamming');
+let LRUCache = require('../src/lru_cache');
 
 
 describe('Jaden Casing String', () => {
@@ -344,6 +345,33 @@ describe('Hamming Numbers', function () {
     expect(hamming(18)).to.equal(30);
     expect(hamming(19)).to.equal(32);
   });
+});
+
+describe('LRU Cache', function () {
+  let store;
+
+  it(`should be a constructor, with capacity, optional init value`, function () {
+    store = new LRUCache(3, {a: 1});
+    assert.equal(store.capacity, 3, 'store.capacity');
+  });
+
+  it('should increase size as we add new key-value pair', function () {
+    assert.equal(store.size, 1, 'store.size');
+    assert.equal(store.a, 1, 'store.a');
+    assert.equal(store.cache('b', 2).b, 2, 'store.b');
+    assert.equal(store.size, 2, 'store.size');
+  });
+
+  it('should have cached value as enumerable, but not size and capacity', function () {
+    assert.deepEqual(Object.keys(store), ['a', 'b']);
+  });
+  
+  it('should be possible to reassign the new property', function () {
+    store.a = 5;
+    assert.equals(store.a, 5, 'store.a');
+  });
+
+
 });
 
 
