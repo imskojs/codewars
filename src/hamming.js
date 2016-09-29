@@ -1,4 +1,5 @@
 var hamming = (n) => {
+  console.log(n);
   if(n === 1){return 1;}
   let sequences = [1];
   let lastIndex = 0;
@@ -48,7 +49,7 @@ var hamming = (n) => {
     let num = 31;
     while(sequences.length < n){
       let newNum = num;
-      while(newNum !== 0 || newNum !== 1){
+      while(newNum !== 0){
         if(newNum % 2 === 0){
           newNum = newNum / 2;
         } else if(newNum % 3 === 0){
@@ -58,6 +59,7 @@ var hamming = (n) => {
         } else {
           newNum = 0;
         }
+        if(newNum === 1){break;}
       }
       if(newNum === 1){
         sequences.push(num);
