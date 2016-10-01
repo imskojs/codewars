@@ -347,67 +347,89 @@ describe('Hamming Numbers', function () {
   });
 });
 
-describe('LRU Cache', function () {
-  let store;
+// describe('LRU Cache', function () {
+//   let store;
 
-  it(`should be a constructor, with capacity, optional init value`, function () {
-    store = new LRUCache(4, {a: 1});
-    assert.equal(store.capacity, 4, 'store.capacity');
+//   it(`should be a constructor, with capacity, optional init value`, function () {
+//     store = new LRUCache(4, {a: 1});
+//     assert.equal(store.capacity, 4, 'store.capacity');
+//   });
+
+//   it('should increase size as we add new key-value pair', function () {
+//     assert.equal(store.size, 1, 'store.size');
+//     assert.equal(store.a, 1, 'store.a');
+//     assert.equal(store.cache('b', 2).b, 2, 'store.b');
+//     assert.equal(store.size, 2, 'store.size');
+//   });
+
+//   it('should have cached value as enumerable, but not anything else', function () {
+//     assert.deepEqual(Object.keys(store), ['a', 'b']);
+//   });
+
+//   it('should be possible to reassign the new property', function () {
+//     store.a = 5;
+//     assert.equal(store.a, 5, 'store.a');
+//   });
+
+//   it('should update already existing property when caching again', function () {
+//     store.cache('a', 11);
+//     assert.equal(store.a, 11);
+//   });
+
+//   it('should have chainable instance', function () {
+//     store.cache('c', 33).cache('d', 66);
+//     assert.equal(store.c, 33);
+//     assert.equal(store.d, 66);
+//   });
+
+//   it('should have a delete method', function () {
+//     assert.equal(store.delete('d'), true, "store.delete('d')");
+//     assert.equal(store.d, undefined, 'store.d');
+//   });
+
+//   it('should delete least recently used if size is bigger than cap', function(){
+//     store.a = 1;
+//     store.b = 2;
+//     store.c = 3;
+//     store.cache('d', 4);
+//     store.cache('e', 5);
+//     assert.equal(store.a, undefined);
+//   });
+
+//   it('should have `cache`, `delete`, and `size` not (enumerable, writable, nor configurable) ', function () {
+//     assert.equal(store.hasOwnProperty('cache'), false);
+//     assert.equal(store.hasOwnProperty('delete'), false);
+//     assert.equal(store.hasOwnProperty('size'), false);
+//     assert.equal(store.delete('cache'), false);
+//     assert.equal(store.delete('delete'), false);
+//     assert.equal(store.delete('size'), false);
+//   });
+
+
+// });
+
+let sum_pairs = require('../src/sum_of_pairs');
+describe('Sum of Pairs', function () {
+  it('should pass', function () {
+    let l1= [1, 4, 8, 7, 3, 15];
+    let l2= [1, -2, 3, 0, -6, 1];
+    let l3= [20, -13, 40];
+    let l4= [1, 2, 3, 4, 1, 0];
+    let l5= [10, 5, 2, 3, 7, 5];
+    let l6= [4, -2, 3, 3, 4];
+    let l7= [0, 2, 0];
+    let l8= [5, 9, 13, -3];
+
+    expect(sum_pairs(l1, 8)+"").to.equal([1, 7]+"");
+    expect(sum_pairs(l2, -6)+"").to.equal([0, -6]+"");
+    expect(sum_pairs(l3, -7)).to.equal(undefined);
+    expect(sum_pairs(l4, 2)+"").to.equal([1, 1]+"");
+    expect(sum_pairs(l5, 10)+"").to.equal([3, 7]+"");
+    expect(sum_pairs(l6, 8)+"").to.equal([4, 4]+"");
+    expect(sum_pairs(l7, 0)+"").to.equal([0, 0]+"");
+    expect(sum_pairs(l8, 10)+"").to.equal([13, -3]+"");
   });
-
-  it('should increase size as we add new key-value pair', function () {
-    assert.equal(store.size, 1, 'store.size');
-    assert.equal(store.a, 1, 'store.a');
-    assert.equal(store.cache('b', 2).b, 2, 'store.b');
-    assert.equal(store.size, 2, 'store.size');
-  });
-
-  it('should have cached value as enumerable, but not anything else', function () {
-    assert.deepEqual(Object.keys(store), ['a', 'b']);
-  });
-
-  it('should be possible to reassign the new property', function () {
-    store.a = 5;
-    assert.equal(store.a, 5, 'store.a');
-  });
-
-  it('should update already existing property when caching again', function () {
-    store.cache('a', 11);
-    assert.equal(store.a, 11);
-  });
-
-  it('should have chainable instance', function () {
-    store.cache('c', 33).cache('d', 66);
-    assert.equal(store.c, 33);
-    assert.equal(store.d, 66);
-  });
-
-  it('should have a delete method', function () {
-    assert.equal(store.delete('d'), true, "store.delete('d')");
-    assert.equal(store.d, undefined, 'store.d');
-  });
-
-  it('should delete least recently used if size is bigger than cap', function(){
-    store.a = 1;
-    store.b = 2;
-    store.c = 3;
-    store.cache('d', 4);
-    store.cache('e', 5);
-    assert.equal(store.a, undefined);
-  });
-
-  it('should have `cache`, `delete`, and `size` not (enumerable, writable, nor configurable) ', function () {
-    assert.equal(store.hasOwnProperty('cache'), false);
-    assert.equal(store.hasOwnProperty('delete'), false);
-    assert.equal(store.hasOwnProperty('size'), false);
-    assert.equal(store.delete('cache'), false);
-    assert.equal(store.delete('delete'), false);
-    assert.equal(store.delete('size'), false);
-  });
-
-
 });
-
 
 
 

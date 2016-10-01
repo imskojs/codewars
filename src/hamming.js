@@ -1,5 +1,5 @@
 var hamming = (n) => {
-  console.log(n);
+  // console.log('input: ', n);
   if(n === 1){return 1;}
   let sequences = [1];
   let lastIndex = 0;
@@ -67,11 +67,15 @@ var hamming = (n) => {
       ++num;
     }
   }
-  return sequences.pop();
+  var x = sequences.pop();
+  // console.log(x);
+  return x;
  
 
 
 };
+
+hamming(1000)
 
 
 
