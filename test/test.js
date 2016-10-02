@@ -1,3 +1,6 @@
+//====================================================
+// Requires// TODO: put them right above the tests
+//====================================================
 let assert = require('chai').assert;
 let expect = require('chai').expect;
 require('../src/jaden_casing_strings');
