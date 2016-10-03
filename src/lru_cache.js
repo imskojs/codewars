@@ -3,3 +3,18 @@
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
+
+  
+let LRUCache = class LRUCache {
+  constructor(capacity, init){
+    // Object.defineProperty(this, '')
+  }
+
+}
+
+
+
+
+
+
+
