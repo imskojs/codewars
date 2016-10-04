@@ -350,6 +350,62 @@ describe('Hamming Numbers', function () {
   });
 });
 
+
+let sum_pairs = require('../src/sum_of_pairs');
+describe('Sum of Pairs', function () {
+  it('should pass', function () {
+    let l1= [1, 4, 8, 7, 3, 15];
+    let l2= [1, -2, 3, 0, -6, 1];
+    let l3= [20, -13, 40];
+    let l4= [1, 2, 3, 4, 1, 0];
+    let l5= [10, 5, 2, 3, 7, 5];
+    let l6= [4, -2, 3, 3, 4];
+    let l7= [0, 2, 0];
+    let l8= [5, 9, 13, -3];
+
+    expect(sum_pairs(l1, 8)+"").to.equal([1, 7]+"");
+    expect(sum_pairs(l2, -6)+"").to.equal([0, -6]+"");
+    expect(sum_pairs(l3, -7)).to.equal(undefined);
+    expect(sum_pairs(l4, 2)+"").to.equal([1, 1]+"");
+    expect(sum_pairs(l5, 10)+"").to.equal([3, 7]+"");
+    expect(sum_pairs(l6, 8)+"").to.equal([4, 4]+"");
+    expect(sum_pairs(l7, 0)+"").to.equal([0, 0]+"");
+    expect(sum_pairs(l8, 10)+"").to.equal([13, -3]+"");
+  });
+});
+
+
+let titleCase = require('../src/title_case');
+describe('Title Case', function () {
+  it('should make first of each starting words capital', function () {
+    assert.equal(titleCase(''), '');
+    assert.equal(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings');
+    assert.equal(titleCase('THE WIND IN THE WILLOWS', 'The In'), 'The Wind in the Willows');
+    assert.equal(titleCase('the quick brown fox'), 'The Quick Brown Fox');
+  });
+});
+
+
+
+
+// Valid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // describe('LRU Cache', function () {
 //   let store;
 
@@ -410,44 +466,4 @@ describe('Hamming Numbers', function () {
 
 
 // })  ;
-
-let sum_pairs = require('../src/sum_of_pairs');
-describe('Sum of Pairs', function () {
-  it('should pass', function () {
-    let l1= [1, 4, 8, 7, 3, 15];
-    let l2= [1, -2, 3, 0, -6, 1];
-    let l3= [20, -13, 40];
-    let l4= [1, 2, 3, 4, 1, 0];
-    let l5= [10, 5, 2, 3, 7, 5];
-    let l6= [4, -2, 3, 3, 4];
-    let l7= [0, 2, 0];
-    let l8= [5, 9, 13, -3];
-
-    expect(sum_pairs(l1, 8)+"").to.equal([1, 7]+"");
-    expect(sum_pairs(l2, -6)+"").to.equal([0, -6]+"");
-    expect(sum_pairs(l3, -7)).to.equal(undefined);
-    expect(sum_pairs(l4, 2)+"").to.equal([1, 1]+"");
-    expect(sum_pairs(l5, 10)+"").to.equal([3, 7]+"");
-    expect(sum_pairs(l6, 8)+"").to.equal([4, 4]+"");
-    expect(sum_pairs(l7, 0)+"").to.equal([0, 0]+"");
-    expect(sum_pairs(l8, 10)+"").to.equal([13, -3]+"");
-  });
-});
-
-
-let titleCase = require('../src/title_case');
-describe('Title Case', function () {
-  it('should make first of each starting words capital', function () {
-    assert.equal(titleCase(''), '');
-    assert.equal(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings');
-    assert.equal(titleCase('THE WIND IN THE WILLOWS', 'The In'), 'The Wind in the Willows');
-    assert.equal(titleCase('the quick brown fox'), 'The Quick Brown Fox');
-  });
-});
-
-
-
-
-// Valid
-
 
