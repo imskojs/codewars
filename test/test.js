@@ -350,66 +350,66 @@ describe('Hamming Numbers', function () {
   });
 });
 
-describe('LRU Cache', function () {
-  let store;
+// describe('LRU Cache', function () {
+//   let store;
 
-  it(`should be a constructor, with capacity, optional init value`, function () {
-    store = new LRUCache(4, {a: 1});
-    assert.equal(store.capacity, 4, 'store.capacity');
-  });
+//   it(`should be a constructor, with capacity, optional init value`, function () {
+//     store = new LRUCache(4, {a: 1});
+//     assert.equal(store.capacity, 4, 'store.capacity');
+//   });
 
-  it('should increase size as we add new key-value pair', function () {
-    assert.equal(store.size, 1, 'store.size');
-    assert.equal(store.a, 1, 'store.a');
-    assert.equal(store.cache('b', 2).b, 2, 'store.b');
-    assert.equal(store.size, 2, 'store.size');
-  });
+//   it('should increase size as we add new key-value pair', function () {
+//     assert.equal(store.size, 1, 'store.size');
+//     assert.equal(store.a, 1, 'store.a');
+//     assert.equal(store.cache('b', 2).b, 2, 'store.b');
+//     assert.equal(store.size, 2, 'store.size');
+//   });
 
-  it('should have cached value as enumerable, but not anything else', function () {
-    assert.deepEqual(Object.keys(store), ['a', 'b']);
-  });
+//   it('should have cached value as enumerable, but not anything else', function () {
+//     assert.deepEqual(Object.keys(store), ['a', 'b']);
+//   });
 
-  it('should be possible to reassign the new property', function () {
-    store.a = 5;
-    assert.equal(store.a, 5, 'store.a');
-  });
+//   it('should be possible to reassign the new property', function () {
+//     store.a = 5;
+//     assert.equal(store.a, 5, 'store.a');
+//   });
 
-  it('should update already existing property when caching again', function () {
-    store.cache('a', 11);
-    assert.equal(store.a, 11);
-  });
+//   it('should update already existing property when caching again', function () {
+//     store.cache('a', 11);
+//     assert.equal(store.a, 11);
+//   });
 
-  it('should have chainable instance', function () {
-    store.cache('c', 33).cache('d', 66);
-    assert.equal(store.c, 33);
-    assert.equal(store.d, 66);
-  });
+//   it('should have chainable instance', function () {
+//     store.cache('c', 33).cache('d', 66);
+//     assert.equal(store.c, 33);
+//     assert.equal(store.d, 66);
+//   });
 
-  it('should have a delete method', function () {
-    assert.equal(store.delete('d'), true, "store.delete('d')");
-    assert.equal(store.d, undefined, 'store.d');
-  });
+//   it('should have a delete method', function () {
+//     assert.equal(store.delete('d'), true, "store.delete('d')");
+//     assert.equal(store.d, undefined, 'store.d');
+//   });
 
-  it('should delete least recently used if size is bigger than cap', function(){
-    store.a = 1;
-    store.b = 2;
-    store.c = 3;
-    store.cache('d', 4);
-    store.cache('e', 5);
-    assert.equal(store.a, undefined);
-  });
+//   it('should delete least recently used if size is bigger than cap', function(){
+//     store.a = 1;
+//     store.b = 2;
+//     store.c = 3;
+//     store.cache('d', 4);
+//     store.cache('e', 5);
+//     assert.equal(store.a, undefined);
+//   });
 
-  it('should have `cache`, `delete`, and `size` not (enumerable, writable, nor configurable) ', function () {
-    assert.equal(store.hasOwnProperty('cache'), false);
-    assert.equal(store.hasOwnProperty('delete'), false);
-    assert.equal(store.hasOwnProperty('size'), false);
-    assert.equal(store.delete('cache'), false);
-    assert.equal(store.delete('delete'), false);
-    assert.equal(store.delete('size'), false);
-  });
+//   it('should have `cache`, `delete`, and `size` not (enumerable, writable, nor configurable) ', function () {
+//     assert.equal(store.hasOwnProperty('cache'), false);
+//     assert.equal(store.hasOwnProperty('delete'), false);
+//     assert.equal(store.hasOwnProperty('size'), false);
+//     assert.equal(store.delete('cache'), false);
+//     assert.equal(store.delete('delete'), false);
+//     assert.equal(store.delete('size'), false);
+//   });
 
 
-})  ;
+// })  ;
 
 let sum_pairs = require('../src/sum_of_pairs');
 describe('Sum of Pairs', function () {
@@ -431,6 +431,17 @@ describe('Sum of Pairs', function () {
     expect(sum_pairs(l6, 8)+"").to.equal([4, 4]+"");
     expect(sum_pairs(l7, 0)+"").to.equal([0, 0]+"");
     expect(sum_pairs(l8, 10)+"").to.equal([13, -3]+"");
+  });
+});
+
+
+let titleCase = require('../src/title_case');
+describe('Title Case', function () {
+  it('should make first of each starting words capital', function () {
+    assert.equal(titleCase(''), '');
+    assert.equal(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings');
+    assert.equal(titleCase('THE WIND IN THE WILLOWS', 'The In'), 'The Wind in the Willows');
+    assert.equal(titleCase('the quick brown fox'), 'The Quick Brown Fox');
   });
 });
 
