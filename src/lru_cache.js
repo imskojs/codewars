@@ -2,53 +2,60 @@
 // discard to make room for the new ones.
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-
-
+class Parent {
+  constructor(){
+    this.size = 0;
+  }
+}
   
-class LRUCache {
+class LRUCache  {
   constructor(capacity, init){
     this.pairs = {};
     this.capacity = capacity;
 
-    Object.defineProperty(this, 'size', {
-      enumerable: false,
-      configurable: false,
-      writable: true,
-      value: 0
-    });
+    Object.defineProperty(this, '_size', { writable: true, value: 0 });
+    // Object.defineProperty(this, 'cache', { 
+    //   enumerable: false,
+    //   configurable: false,
+    //   writeable: false,
+    //   value: (key, val) => { 
+    //     defineAndSet(this, key, val); 
+    //     return this; 
+    //   }
+    // });
 
     if(init){
       for(let key in init){
-        Object.defineProperty(this, key, {
-          enumerable: true,
-          configurable: true,
-          // writable: true,
-          // value: init[key],
-          get: function(){
-            return this.pairs[key];
-          },
-          set: function(value){
-            if(this.pairs[key] === undefined){
-              ++this.size;
-            }
-            this.pairs[key] = value;
-          }
-        });
-        console.log("key :::\n", init[key]);
-        this[key] = init[key];
+        defineAndSet(this, key, init[key]);
       }
     }
-
   } //ctor
+  cache(key, val) {
+    defineAndSet(this, key, val);
+    return this;
+  }
+  get size(){
+    return this._size;
+  }
 
 } // LRU
 
-let x = new LRUCache(4, {a: 1});
-console.log("x :::\n", x);
-console.log("x.size :::\n", x.size);
-console.log("x.a :::\n", x.a);
+
+function defineAndSet(self, key, val){
+  Object.defineProperty(self, key, { enumerable: true, configurable: true,
+    get: function(){ return self.pairs[key]; },
+    set: function(value){
+      if(self.pairs[key] === undefined){ ++self._size; }
+      self.pairs[key] = value;
+    }
+  });
+  self[key] = val;
+}
 
 
+
+var store = new LRUCache(5, {a: 1});
+console.dir(store.hasOwnProperty('cache'));
 
 
 
