@@ -58,6 +58,11 @@ describe('LRU Cache', function () {
     assert.equal(store.a, undefined);
   });
 
+  it('should have delete method undeletable', function () {
+    assert.equal(delete store.delete, false );
+    assert.equal(delete store.capacity, false );
+  });
+
 
 
 })  ;

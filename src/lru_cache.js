@@ -1,3 +1,4 @@
+// 'use strict';
 //  When the cache is full, the algorithm must choose which items to 
 // discard to make room for the new ones.
 
@@ -18,7 +19,7 @@ class LRUCache  {
     Object.defineProperty(this, '_capacity', { writable: true, value: capacity });
     Object.defineProperty(this, '_size', { writable: true, value: 0 });
     Object.defineProperty(this, '_track', { writable: true, value: [] });
-    Object.defineProperty(this, '_delete', { 
+    Object.defineProperty(this, 'delete', { 
       value: function(key){
         if(this.pairs[key]){
           --this._size;
@@ -44,6 +45,27 @@ class LRUCache  {
     }
   } //ctor
 
+  // get capacity(){
+  //   return this._capacity;
+  // }
+  
+  // set capacity(val){
+  //   this._capacity = val;
+  //   while(this._track.length > this._capacity){
+  //     this.delete(this._track[0]);
+  //   }
+  // }
+
+  hasOwnProperty(key){
+    if(key === 'delete' || key === 'size' || key === 'cache'){
+      return false;
+    } else {
+      return Object.prototype.hasOwnProperty.call(this, key);
+    }
+  }
+
+
+
   cache(key, val) {
     defineAndSet(this, key, val);
     return this;
@@ -53,44 +75,58 @@ class LRUCache  {
     return this._size;
   }
 
-  get capacity(){
-    return this._capacity;
-  }
 
-  set capacity(val){
-    this._capacity = val;
-    while(this._track.length > this._capacity){
-      this.delete(this._track[0]);
-    }
-  }
 
-  get delete(){
-    return this._delete;
-  }
-
-  set delete(val){
-    return this._delete;
-  }
-
-  // delete(key){
-  //   // let key = arguments[0];
-  //   if(this.pairs[key]){
-  //     --this._size;
-  //     delete this.pairs[key];
-  //     delete this[key];
-  //     let index = this._track.indexOf(key);
-  //     if(index !== -1){
-  //       this._track.splice(index, 1);
-  //     }
-  //     return true;
-  //   } else if(key === 'cache' || key === 'delete' || key === 'size') {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
 
 } // LRU
+
+// get delete(){
+//   return this._delete;
+// }
+
+// set delete(val){
+//   return this._delete;
+// }
+
+// delete(key){
+//   // let key = arguments[0];
+//   if(this.pairs[key]){
+//     --this._size;
+//     delete this.pairs[key];
+//     delete this[key];
+//     let index = this._track.indexOf(key);
+//     if(index !== -1){
+//       this._track.splice(index, 1);
+//     }
+//     return true;
+//   } else if(key === 'cache' || key === 'delete' || key === 'size') {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// }
+  
+// Object.defineProperty(LRUCache.prototype, 'delete', {
+//     configurable: false,
+//     writable: false,
+//     enumerable: false,
+//     value: function(key){
+//     if(this.pairs[key]){
+//       --this._size;
+//       delete this.pairs[key];
+//       delete this[key];
+//       let index = this._track.indexOf(key);
+//       if(index !== -1){
+//         this._track.splice(index, 1);
+//       }
+//       return true;
+//     } else if(key === 'cache' || key === 'delete' || key === 'size') {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   }
+// });
 
 
 function defineAndSet(self, key, val){
@@ -121,11 +157,8 @@ function defineAndSet(self, key, val){
   self[key] = val;
 }
 
-let x = new LRUCache(2, {a: 1, b: 2});
-x.capacity = 1;
-console.log("x :::\n", x);
-let len = Object.keys(x).length;
-console.log("len :::\n", len);
+
+// let x = new LRUCache(3, {a:1});
 
 
 module.exports = LRUCache;
