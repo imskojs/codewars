@@ -21,6 +21,7 @@ describe('LRU Cache', function () {
     assert.equal(store.hasOwnProperty('size'), false);
     assert.equal(store.delete('cache'), false);
     assert.equal(store.delete('delete'), false);
+    assert.equal(store.delete('capacity'), false);
     assert.equal(store.delete('size'), false);
   });
 
@@ -61,6 +62,7 @@ describe('LRU Cache', function () {
   it('should have delete method undeletable', function () {
     assert.equal(delete store.delete, false );
     assert.equal(delete store.capacity, false );
+    assert.equal(delete store.size, false );
   });
 
 
