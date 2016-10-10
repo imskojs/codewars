@@ -14,15 +14,6 @@ class MemoryManager {
       // [15, 10],
       // [25, 10]
     ];
-    // this.block = {
-    //   0: 1,
-    //   1: 2,
-    //   3: 3,
-    //   6: 4,
-    //   10: 5,
-    //   15: 10,
-    //   25:10
-    // };
     this.memory = memory;
   }
 
@@ -52,6 +43,7 @@ class MemoryManager {
         return usedStart + usedEnd;
       }
     }
+    // Todo account for very first, and very end
     for(let i = 0, j = 1; j < this.blocks.length; ++i, ++j){
       let currBlock = this.blocks[i];
       let nextBlock = this.blocks[j];
@@ -82,19 +74,6 @@ class MemoryManager {
  * @throws If pointer is in unallocated memory.
  */
   read(pointer){
-    // let okToRead = Object.keys(this.block)
-    //   .some(key => {
-    //     let val = this.block[key];
-    //     if(pointer >=key && pointer < key + val){
-    //       return true;
-    //     }
-    //   });
-    // if(okToRead){
-    //   return this.memory[pointer];
-    // } else {
-    //   throw new Error(false);
-    // }
-
 
     let okToRead = this.blocks
       .some(array => {
@@ -131,18 +110,6 @@ class MemoryManager {
     } else {
       throw new Error(false);
     }
-    // let okToWrite = Object.keys(this.block)
-    //   .some((key) => {
-    //     let val = this.block[key];
-    //     if(pointer >= key && pointer < key + val){
-    //       return true;
-    //     }
-    //   });
-    // if(okToWrite){
-    //   this.memory[pointer] = value;
-    // } else {
-    //   throw new Error(false);
-    // }
   }
 
 
