@@ -24,36 +24,40 @@ class MemoryManager {
  * @throws If it is not possible to allocate a block of the requested size.
  */
   allocate(size){
+    // When size is bigger than whole memory.
     if(this.memory.length < size){
       throw new Error('total memory too small');
     }
+    // When nothing in blocks.
     if(this.blocks.length === 0){
       this.blocks.push([0, size]);
       return 0;
     }
-    if(this.blocks.length === 1){
-      let usedStart = this.blocks[0][0];
-      let usedEnd = this.blocks[0][1];
-      if(usedStart >= size){
-        this.blocks.unshift([0, size]);
-        return 0;
-      }
-      if(this.blocks.length - usedEnd >= size){
-        this.blocks.push([usedStart + usedEnd, size]);
-        return usedStart + usedEnd;
+    // If there is a space at the start.
+    let usedStart = this.blocks[0][0];
+    let usedEnd = this.blocks[0][1];
+    if(usedStart >= size){
+      this.blocks.unshift([0, size]);
+      return 0;
+    }
+    // If there are spaces between blocks.
+    if(this.blocks.length > 1){
+      for(let i = 0, j = 1; j < this.blocks.length; ++i, ++j){
+        let currBlock = this.blocks[i];
+        let nextBlock = this.blocks[j];
+        let currEndIndex = currBlock[0] + currBlock[1] - 1;
+        let nextStartIndex = nextBlock[0];
+        if(nextStartIndex - currEndIndex - 1 > size){
+          let betweenIndex = currBlock[0] + currBlock[1];
+          this.blocks.splice(j, 0, [betweenIndex, size]);
+          return betweenIndex;
+        }
       }
     }
-    // Todo account for very first, and very end
-    for(let i = 0, j = 1; j < this.blocks.length; ++i, ++j){
-      let currBlock = this.blocks[i];
-      let nextBlock = this.blocks[j];
-      let currEndIndex = currBlock[0] + currBlock[1] - 1;
-      let nextStartIndex = nextBlock[0];
-      if(nextStartIndex - currEndIndex - 1 > size){
-        let betweenIndex = currBlock[0] + currBlock[1];
-        this.blocks.splice(j, 0, [betweenIndex, size]);
-        return betweenIndex;
-      }
+    // If there is a space at the end.
+    if(this.blocks.length - usedEnd >= size){
+      this.blocks.push([usedStart + usedEnd, size]);
+      return usedStart + usedEnd;
     }
 
   }
