@@ -1,3 +1,4 @@
+// Not working below code is to see what's in the code.
 var BuildBomb = function (global){
   var myWireVar = 'boom'+~~(Math.random()*10);
 
