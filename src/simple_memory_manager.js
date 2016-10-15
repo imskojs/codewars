@@ -40,7 +40,7 @@ class MemoryManager {
       this.blocks.unshift([0, size]);
       return 0;
     }
-    // If there are spaces between blocks.
+    // If there is a space between blocks.
     if(this.blocks.length > 1){
       for(let i = 0, j = 1; j < this.blocks.length; ++i, ++j){
         let currBlock = this.blocks[i];
