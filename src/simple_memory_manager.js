@@ -24,21 +24,21 @@ class MemoryManager {
  * @throws If it is not possible to allocate a block of the requested size.
  */
   allocate(size){
-    if(size === 129) {
-      throw new Error('total memory too small');
-    }
+    // if(size === 129) {
+    //   throw new Error('total memory too small');
+    // }
     // When size is bigger than whole memory.
     if(this.memory.length <= size){
       throw new Error('total memory too small');
     }
-    // let totalUsed = this.blocks.reduce((accu, curr) => {
-    //   let size = curr[1];
-    //   return accu + size;
-    // }, 0);
+    let totalUsed = this.blocks.reduce((accu, curr) => {
+      let size = curr[1];
+      return accu + size;
+    }, 0);
 
-    // if(this.memory.length - totalUsed <= size){
-    //   throw new Error('total memory too small');
-    // }
+    if(this.memory.length - totalUsed <= size){
+      throw new Error('total memory too small');
+    }
     // When nothing in blocks.
     if(this.blocks.length === 0){
       this.blocks.push([0, size]);
@@ -91,7 +91,7 @@ class MemoryManager {
         return index;
       }
     }
-    // throw new Error('nothing to release');
+    throw new Error('nothing to release');
   }
 
 /**
