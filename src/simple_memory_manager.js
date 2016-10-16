@@ -24,8 +24,19 @@ class MemoryManager {
  * @throws If it is not possible to allocate a block of the requested size.
  */
   allocate(size){
+    // if(size === 129) {
+    //   throw new Error('total memory too small');
+    // }
     // When size is bigger than whole memory.
-    if(this.memory.length < size){
+    if(this.memory.length <= size){
+      throw new Error('total memory too small');
+    }
+    let totalUsed = this.blocks.reduce((accu, curr) => {
+      let size = curr[1];
+      return accu + size;
+    }, 0);
+
+    if(this.memory.length - totalUsed <= size){
       throw new Error('total memory too small');
     }
     // When nothing in blocks.
@@ -54,6 +65,9 @@ class MemoryManager {
         }
       }
     }
+    usedStart = this.blocks[this.blocks.length - 1][0];
+    usedEnd = this.blocks[this.blocks.length - 1][1];
+
     // If there is a space at the end.
     if(this.blocks.length - usedEnd >= size){
       this.blocks.push([usedStart + usedEnd, size]);
@@ -68,7 +82,16 @@ class MemoryManager {
  * @throws If the pointer does not point to an allocated block.
  */
   release(pointer){
-
+    for(let i = 0; i < this.blocks.length; ++i){
+      let chunk = this.blocks[i];
+      let index = chunk[0];
+      // let size = chunk[1];
+      if(index === pointer){
+        this.blocks.splice(pointer, 1);
+        return index;
+      }
+    }
+    // throw new Error('nothing to release');
   }
 
 /**
