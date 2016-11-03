@@ -13,13 +13,10 @@ function queueTime(customers, n) {
 }
 
 function findMinimumTillIndex(tills){
-  var minValue;
-  var minIndex;
+  var minValue = tills[0];
+  var minIndex = 0;
   for(var i = 0; i < tills.length; ++i){
-    if(minValue === undefined){
-      minValue = tills[i];
-      minIndex = i;
-    } else if(minValue > tills[i]){
+    if(minValue > tills[i]){
       minValue = tills[i];
       minIndex = i;
     }
